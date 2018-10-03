@@ -1,0 +1,843 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PM Regressions}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Part 1: Performance Metrics in
+Regression}\label{part-1-performance-metrics-in-regression}
+
+\subsubsection{Chanil Park}\label{chanil-park}
+
+\subsubsection{GitHub:
+https://github.com/treezi1004}\label{github-httpsgithub.comtreezi1004}
+
+\subsubsection{E-mail:
+treezi1004@gmail.com}\label{e-mail-treezi1004gmail.com}
+
+\subsection{regression methods}\label{regression-methods}
+
+\begin{itemize}
+\tightlist
+\item
+  linear regression
+\item
+  k-neighbors regression
+\item
+  Ridge regression
+\item
+  decision tree regression
+\item
+  random forest regression
+\item
+  gradient Boosting regression
+\item
+  SGD regression
+\item
+  support vector regression (SVR)
+\item
+  linear SVR
+\item
+  multi-layer perceptron regression.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}178}]:} \PY{c+c1}{\PYZsh{} magic commands, sets the backend of matplotlib to the \PYZsq{}inline\PYZsq{} backend}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{c+c1}{\PYZsh{} \PYZhy{}*\PYZhy{} coding: utf\PYZhy{}8 \PYZhy{}*\PYZhy{}}
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          
+          \PY{l+s+sd}{Performance Metrics in Regression}
+          \PY{l+s+sd}{x = weight and y = height.}
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{datetime}
+          \PY{k+kn}{import} \PY{n+nn}{random}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Ridge}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{SGDRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVR}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVR}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPRegressor}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}absolute\PYZus{}error}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{r2\PYZus{}score}
+          
+          \PY{c+c1}{\PYZsh{}from utilities.losses import compute\PYZus{}loss}
+          \PY{c+c1}{\PYZsh{}from utilities.optimizers import gradient\PYZus{}descent, pso, mini\PYZus{}batch\PYZus{}gradient\PYZus{}descent}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+          
+          \PY{c+c1}{\PYZsh{} rms = sqrt(mean\PYZus{}squared\PYZus{}error(y\PYZus{}actual, y\PYZus{}predicted))}
+          
+          \PY{c+c1}{\PYZsh{} General settings}
+          \PY{c+c1}{\PYZsh{}from utilities.visualization import visualize\PYZus{}train, visualize\PYZus{}test}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{c+c1}{\PYZsh{} Initialize seed}
+          \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1000}
+          \PY{c+c1}{\PYZsh{} Freeze the random seed}
+          \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+          \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+          \PY{n}{train\PYZus{}test\PYZus{}split\PYZus{}test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.3}
+          
+          \PY{c+c1}{\PYZsh{} Training settings}
+          \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}  \PY{c+c1}{\PYZsh{} step size}
+          \PY{n}{max\PYZus{}iters} \PY{o}{=} \PY{l+m+mi}{50}  \PY{c+c1}{\PYZsh{} max iterations}
+          \PY{n}{tol} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{c+c1}{\PYZsh{}SGDRegressor, Ridge}
+          \PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Load Data from CSV}
+          \PY{l+s+sd}{    :return: df    a panda data frame}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{c+c1}{\PYZsh{} File Path is dependent on the starting directory path of Jupyter.}
+              \PY{c+c1}{\PYZsh{} df = pd.read\PYZus{}csv(\PYZdq{}../data/diamonds.csv\PYZdq{})}
+              \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../Part 1 Performance Metrics in Regression/data/diamonds.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{return} \PY{n}{df}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{k}{def} \PY{n+nf}{standardize}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Standardize Data Set}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{train\PYZus{}mean} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{train\PYZus{}std} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{p}{(}\PY{n}{train\PYZus{}data} \PY{o}{\PYZhy{}} \PY{n}{train\PYZus{}mean}\PY{p}{)} \PY{o}{/} \PY{n}{train\PYZus{}std}
+              \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{p}{(}\PY{n}{test\PYZus{}data} \PY{o}{\PYZhy{}} \PY{n}{train\PYZus{}mean}\PY{p}{)} \PY{o}{/} \PY{n}{train\PYZus{}std}
+              \PY{k}{return} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{k}{def} \PY{n+nf}{preprocessing}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Pre\PYZhy{}processing the data}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{data\PYZus{}full} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+              \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{labels} \PY{o}{=} \PY{n}{data\PYZus{}full}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{k}{return} \PY{n}{data\PYZus{}full}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{labels}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{k}{def} \PY{n+nf}{data\PYZus{}preprocess}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Data preprocess:}
+          \PY{l+s+sd}{        1. Split the entire dataset into train and test}
+          \PY{l+s+sd}{        2. Split outputs and inputs}
+          \PY{l+s+sd}{        3. Standardize train and test}
+          \PY{l+s+sd}{        4. Add intercept dummy for computation convenience}
+          \PY{l+s+sd}{    :param data: the given dataset (format: panda DataFrame)}
+          \PY{l+s+sd}{    :return: train\PYZus{}data       train data contains only inputs}
+          \PY{l+s+sd}{             train\PYZus{}labels     train data contains only labels}
+          \PY{l+s+sd}{             test\PYZus{}data        test data contains only inputs}
+          \PY{l+s+sd}{             test\PYZus{}labels      test data contains only labels}
+          \PY{l+s+sd}{             train\PYZus{}data\PYZus{}full       train data (full) contains both inputs and labels}
+          \PY{l+s+sd}{             test\PYZus{}data\PYZus{}full       test data (full) contains both inputs and labels}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{c+c1}{\PYZsh{} Split the data into train and test}
+              \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split\PYZus{}test\PYZus{}size}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Pre\PYZhy{}process data (both train and test)}
+              \PY{n}{train\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels} \PY{o}{=} \PY{n}{preprocessing}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+              \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels} \PY{o}{=} \PY{n}{preprocessing}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Handling categorized data}
+              \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cut}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} print(train\PYZus{}data.head())}
+              \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cut}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clarity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}    
+              \PY{c+c1}{\PYZsh{} print(test\PYZus{}data.head())}
+              
+              \PY{c+c1}{\PYZsh{} Standardize the inputs}
+              \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{standardize}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Tricks: add dummy intercept to both train and test}
+              \PY{n}{train\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept\PYZus{}dummy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+              \PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{intercept\PYZus{}dummy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} print(train\PYZus{}data.head())}
+              \PY{c+c1}{\PYZsh{} print(test\PYZus{}data.head())    }
+              \PY{k}{return} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{train\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{thetas}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{x}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{thetas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{k}{def} \PY{n+nf}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}\PY{p}{:}
+              \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Track learning starting time}
+              \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{)}
+              \PY{n}{prediction} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}pred\PYZus{}label = predict(test\PYZus{}data, gradient\PYZus{}ws[\PYZhy{}1])}
+              \PY{n}{end\PYZus{}time} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Track learning ending time}
+              \PY{n}{exection\PYZus{}time} \PY{o}{=} \PY{p}{(}\PY{n}{end\PYZus{}time} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}\PY{p}{)}\PY{o}{.}\PY{n}{total\PYZus{}seconds}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Track execution time}
+              \PY{n}{mse} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{prediction}\PY{p}{)}
+              \PY{n}{rmse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mse}\PY{p}{)}
+              \PY{n}{r2\PYZus{}error} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{prediction}\PY{p}{)}
+              \PY{n}{mae} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{prediction}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Exection time: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{exection\PYZus{}time}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Coefficients: \PYZdq{}, model.coef\PYZus{})}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Intercept: \PYZdq{}, model.intercept\PYZus{})}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mse}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rmse}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{r2\PYZus{}error}\PY{p}{)}  \PY{c+c1}{\PYZsh{} R2 should be maximize}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MAE: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mae}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}plt.scatter(x=test\PYZus{}data\PYZus{}full[\PYZdq{}carat\PYZdq{}], y=test\PYZus{}data\PYZus{}full[\PYZdq{}price\PYZdq{}], color=\PYZsq{}blue\PYZsq{})}
+              \PY{c+c1}{\PYZsh{}plt.plot(test\PYZus{}data\PYZus{}full[\PYZdq{}carat\PYZdq{}], pred\PYZus{}label, color=\PYZsq{}red\PYZsq{}, linewidth=2)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} load data }
+              \PY{n}{data} \PY{o}{=} \PY{n}{load\PYZus{}data}\PY{p}{(}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Preprocess the data}
+              \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{,} \PY{n}{train\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full} \PY{o}{=} \PY{n}{data\PYZus{}preprocess}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Build baseline model}
+              \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{KNeighborsRegressor}\PY{p}{(}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{n}{max\PYZus{}iters}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{n}{tol}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{GradientBoostingRegressor}\PY{p}{(}\PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{SGDRegressor}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.0001}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{SVR}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{n}{max\PYZus{}iters}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{n}{tol}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{LinearSVR}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{n}{max\PYZus{}iters}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{n}{tol}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              \PY{n}{model} \PY{o}{=} \PY{n}{MLPRegressor}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{n}{max\PYZus{}iters}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{n}{tol}\PY{p}{)}
+              \PY{n}{applyModelThenResult}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}full}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}labels}\PY{p}{)}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+Exection time:  0.041579
+MSE:  1302826.998086393
+RMSE:  1141.4144725236285
+R2:  0.9189006141368553
+MAE:  746.9610173424568
+
+
+KNeighborsRegressor(algorithm='auto', leaf\_size=30, metric='minkowski',
+          metric\_params=None, n\_jobs=1, n\_neighbors=5, p=2,
+          weights='uniform')
+Exection time:  10.546281
+MSE:  751250.2458608331
+RMSE:  866.7469329976502
+R2:  0.9532355917874448
+MAE:  399.6232233345693
+
+
+Ridge(alpha=0.1, copy\_X=True, fit\_intercept=True, max\_iter=50,
+   normalize=False, random\_state=None, solver='auto', tol=0.1)
+Exection time:  0.020156
+MSE:  1302623.9261678192
+RMSE:  1141.3255127998407
+R2:  0.9189132551152097
+MAE:  747.3468590970301
+
+
+DecisionTreeRegressor(criterion='mse', max\_depth=None, max\_features=None,
+           max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+           min\_impurity\_split=None, min\_samples\_leaf=1,
+           min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+           presort=False, random\_state=None, splitter='best')
+Exection time:  0.394008
+MSE:  800.7219750339884
+RMSE:  28.29703120530471
+R2:  0.9999501560372039
+MAE:  2.6666048696082068
+
+
+RandomForestRegressor(bootstrap=True, criterion='mse', max\_depth=None,
+           max\_features='auto', max\_leaf\_nodes=None,
+           min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+           min\_samples\_leaf=1, min\_samples\_split=2,
+           min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+           oob\_score=False, random\_state=None, verbose=0, warm\_start=False)
+Exection time:  2.479847
+MSE:  766.9625633419848
+RMSE:  27.694088960317593
+R2:  0.9999522575192574
+MAE:  3.3305277468792553
+
+
+GradientBoostingRegressor(alpha=0.1, criterion='friedman\_mse', init=None,
+             learning\_rate=0.1, loss='ls', max\_depth=3, max\_features=None,
+             max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+             min\_impurity\_split=None, min\_samples\_leaf=1,
+             min\_samples\_split=2, min\_weight\_fraction\_leaf=0.0,
+             n\_estimators=100, presort='auto', random\_state=None,
+             subsample=1.0, verbose=0, warm\_start=False)
+Exection time:  4.680321
+MSE:  55149.58329975577
+RMSE:  234.8394841157589
+R2:  0.9965670059472302
+MAE:  139.16913191503465
+
+
+SGDRegressor(alpha=0.1, average=False, epsilon=0.1, eta0=0.01,
+       fit\_intercept=True, l1\_ratio=0.15, learning\_rate='invscaling',
+       loss='squared\_loss', max\_iter=100, n\_iter=None, penalty='l2',
+       power\_t=0.25, random\_state=None, shuffle=True, tol=0.0001,
+       verbose=0, warm\_start=False)
+Exection time:  0.073863
+MSE:  1778312.6840206347
+RMSE:  1333.5339080880676
+R2:  0.8893022122211576
+MAE:  954.0192419765367
+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+F:\textbackslash{}Users\textbackslash{}ncksd\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}svm\textbackslash{}base.py:218: ConvergenceWarning: Solver terminated early (max\_iter=50).  Consider pre-processing your data with StandardScaler or MinMaxScaler.
+  \% self.max\_iter, ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+SVR(C=1.0, cache\_size=200, coef0=0.0, degree=3, epsilon=0.1, gamma='auto',
+  kernel='rbf', max\_iter=50, shrinking=True, tol=0.1, verbose=False)
+Exection time:  0.430154
+MSE:  46186201.46510418
+RMSE:  6796.043074106004
+R2:  -1.8750345054816244
+MAE:  6311.630363497374
+
+
+LinearSVR(C=1.0, dual=True, epsilon=0.0, fit\_intercept=True,
+     intercept\_scaling=1.0, loss='epsilon\_insensitive', max\_iter=50,
+     random\_state=None, tol=0.1, verbose=0)
+Exection time:  0.056519
+MSE:  2260896.5186994984
+RMSE:  1503.6277859561849
+R2:  0.8592619592348267
+MAE:  793.174067062444
+
+
+MLPRegressor(activation='relu', alpha=0.1, batch\_size='auto', beta\_1=0.9,
+       beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+       hidden\_layer\_sizes=(100,), learning\_rate='constant',
+       learning\_rate\_init=0.001, max\_iter=50, momentum=0.9,
+       nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+       shuffle=True, solver='adam', tol=0.1, validation\_fraction=0.1,
+       verbose=False, warm\_start=False)
+Exection time:  9.84004
+MSE:  719826.6352844844
+RMSE:  848.4259751354176
+R2:  0.9551916730807306
+MAE:  524.105397047731
+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+F:\textbackslash{}Users\textbackslash{}ncksd\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}neural\_network\textbackslash{}multilayer\_perceptron.py:564: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (50) reached and the optimization hasn't converged yet.
+  \% self.max\_iter, ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \section{Initialize seed}\label{initialize-seed}
+
+seed = 100 \# Freeze the random seed random.seed(seed)
+np.random.seed(seed) train\_test\_split\_test\_size = 0.3
+
+\section{Training settings}\label{training-settings}
+
+alpha = 0.1 \# step size max\_iters = 50 \# max iterations tol = 0.1
+\#SGDRegressor, Ridge verbose = 0
+
+\section{Result 0}\label{result-0}
+
+LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1,
+normalize=False) Exection time: 0.063448 MSE: 1268646.7862949227 RMSE:
+1126.342215445609 R2: 0.9187362516002656 MAE: 734.726137931008
+
+KNeighborsRegressor(algorithm='auto', leaf\_size=30, metric='minkowski',
+metric\_params=None, n\_jobs=1, n\_neighbors=5, p=2, weights='uniform')
+Exection time: 9.987666 MSE: 725912.9352243233 RMSE: 852.00524366011 R2:
+0.9535013159175193 MAE: 385.53302434804107
+
+Ridge(alpha=0.1, copy\_X=True, fit\_intercept=True, max\_iter=50,
+normalize=False, random\_state=None, solver='auto', tol=0.1) Exection
+time: 0.023038 MSE: 1268714.6254513077 RMSE: 1126.3723298498182 R2:
+0.9187319061321687 MAE: 734.6959749673141
+
+DecisionTreeRegressor(criterion='mse', max\_depth=None,
+max\_features=None, max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+min\_impurity\_split=None, min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, presort=False, random\_state=None,
+splitter='best') Exection time: 0.359628 MSE: 1756.1991101223582 RMSE:
+41.9070293640859 R2: 0.9998875058651734 MAE: 3.445927573847485
+
+RandomForestRegressor(bootstrap=True, criterion='mse', max\_depth=None,
+max\_features='auto', max\_leaf\_nodes=None,
+min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+oob\_score=False, random\_state=None, verbose=0, warm\_start=False)
+Exection time: 1.889822 MSE: 7628.4119354838695 RMSE: 87.34078048359694
+R2: 0.9995113585949127 MAE: 4.7517859349894955
+
+GradientBoostingRegressor(alpha=0.1, criterion='friedman\_mse',
+init=None, learning\_rate=0.1, loss='ls', max\_depth=3,
+max\_features=None, max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+min\_impurity\_split=None, min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, n\_estimators=100, presort='auto',
+random\_state=None, subsample=1.0, verbose=0, warm\_start=False)
+Exection time: 3.353945 MSE: 59194.525068624454 RMSE: 243.2992500371188
+R2: 0.9962082677039942 MAE: 136.73695038705083
+
+SGDRegressor(alpha=0.1, average=False, epsilon=0.1, eta0=0.01,
+fit\_intercept=True, l1\_ratio=0.15, learning\_rate='invscaling',
+loss='squared\_loss', max\_iter=None, n\_iter=None, penalty='l2',
+power\_t=0.25, random\_state=None, shuffle=True, tol=0.0001, verbose=0,
+warm\_start=False) Exection time: 0.034085 MSE: 1878487.892441961 RMSE:
+1370.5794002690836 R2: 0.8796726014581465 MAE: 944.1035281795978
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\svm\base.py:218:
+ConvergenceWarning: Solver terminated early (max\_iter=50). Consider
+pre-processing your data with StandardScaler or MinMaxScaler. \%
+self.max\_iter, ConvergenceWarning)
+
+SVR(C=1.0, cache\_size=200, coef0=0.0, degree=3, epsilon=0.1,
+gamma='auto', kernel='rbf', max\_iter=50, shrinking=True, tol=0.1,
+verbose=False) Exection time: 0.386239 MSE: 46715032.69590925 RMSE:
+6834.839624739504 R2: -1.9923527214163625 MAE: 6372.145040938413
+
+LinearSVR(C=1.0, dual=True, epsilon=0.0, fit\_intercept=True,
+intercept\_scaling=1.0, loss='epsilon\_insensitive', max\_iter=50,
+random\_state=None, tol=0.1, verbose=0) Exection time: 0.049913 MSE:
+2177033.2728453944 RMSE: 1475.4773033989354 R2: 0.8605491409795514 MAE:
+778.0873717466104
+
+MLPRegressor(activation='relu', alpha=0.1, batch\_size='auto',
+beta\_1=0.9, beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+hidden\_layer\_sizes=(100,), learning\_rate='constant',
+learning\_rate\_init=0.001, max\_iter=50, momentum=0.9,
+nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+shuffle=True, solver='adam', tol=0.1, validation\_fraction=0.1,
+verbose=False, warm\_start=False) Exection time: 9.788891 MSE:
+921054.5714892306 RMSE: 959.7158806069798 R2: 0.9410014294218801 MAE:
+538.5885614596806
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\neural\_network\multilayer\_perceptron.py:564:
+ConvergenceWarning: Stochastic Optimizer: Maximum iterations (50)
+reached and the optimization hasn't converged yet. \% self.max\_iter,
+ConvergenceWarning)
+
+    \section{Initialize seed}\label{initialize-seed}
+
+seed = 1000 \# Freeze the random seed random.seed(seed)
+np.random.seed(seed) train\_test\_split\_test\_size = 0.3
+
+\section{Training settings}\label{training-settings}
+
+alpha = 0.1 \# step size max\_iters = 50 \# max iterations tol = 0.1
+\#SGDRegressor, Ridge verbose = 0
+
+LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1,
+normalize=False) Exection time: 0.041579 MSE: 1302826.998086393 RMSE:
+1141.4144725236285 R2: 0.9189006141368553 MAE: 746.9610173424568
+
+KNeighborsRegressor(algorithm='auto', leaf\_size=30, metric='minkowski',
+metric\_params=None, n\_jobs=1, n\_neighbors=5, p=2, weights='uniform')
+Exection time: 10.546281 MSE: 751250.2458608331 RMSE: 866.7469329976502
+R2: 0.9532355917874448 MAE: 399.6232233345693
+
+Ridge(alpha=0.1, copy\_X=True, fit\_intercept=True, max\_iter=50,
+normalize=False, random\_state=None, solver='auto', tol=0.1) Exection
+time: 0.020156 MSE: 1302623.9261678192 RMSE: 1141.3255127998407 R2:
+0.9189132551152097 MAE: 747.3468590970301
+
+DecisionTreeRegressor(criterion='mse', max\_depth=None,
+max\_features=None, max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+min\_impurity\_split=None, min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, presort=False, random\_state=None,
+splitter='best') Exection time: 0.394008 MSE: 800.7219750339884 RMSE:
+28.29703120530471 R2: 0.9999501560372039 MAE: 2.6666048696082068
+
+RandomForestRegressor(bootstrap=True, criterion='mse', max\_depth=None,
+max\_features='auto', max\_leaf\_nodes=None,
+min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+oob\_score=False, random\_state=None, verbose=0, warm\_start=False)
+Exection time: 2.479847 MSE: 766.9625633419848 RMSE: 27.694088960317593
+R2: 0.9999522575192574 MAE: 3.3305277468792553
+
+GradientBoostingRegressor(alpha=0.1, criterion='friedman\_mse',
+init=None, learning\_rate=0.1, loss='ls', max\_depth=3,
+max\_features=None, max\_leaf\_nodes=None, min\_impurity\_decrease=0.0,
+min\_impurity\_split=None, min\_samples\_leaf=1, min\_samples\_split=2,
+min\_weight\_fraction\_leaf=0.0, n\_estimators=100, presort='auto',
+random\_state=None, subsample=1.0, verbose=0, warm\_start=False)
+Exection time: 4.680321 MSE: 55149.58329975577 RMSE: 234.8394841157589
+R2: 0.9965670059472302 MAE: 139.16913191503465
+
+SGDRegressor(alpha=0.1, average=False, epsilon=0.1, eta0=0.01,
+fit\_intercept=True, l1\_ratio=0.15, learning\_rate='invscaling',
+loss='squared\_loss', max\_iter=100, n\_iter=None, penalty='l2',
+power\_t=0.25, random\_state=None, shuffle=True, tol=0.0001, verbose=0,
+warm\_start=False) Exection time: 0.073863 MSE: 1778312.6840206347 RMSE:
+1333.5339080880676 R2: 0.8893022122211576 MAE: 954.0192419765367
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\svm\base.py:218:
+ConvergenceWarning: Solver terminated early (max\_iter=50). Consider
+pre-processing your data with StandardScaler or MinMaxScaler. \%
+self.max\_iter, ConvergenceWarning)
+
+SVR(C=1.0, cache\_size=200, coef0=0.0, degree=3, epsilon=0.1,
+gamma='auto', kernel='rbf', max\_iter=50, shrinking=True, tol=0.1,
+verbose=False) Exection time: 0.430154 MSE: 46186201.46510418 RMSE:
+6796.043074106004 R2: -1.8750345054816244 MAE: 6311.630363497374
+
+LinearSVR(C=1.0, dual=True, epsilon=0.0, fit\_intercept=True,
+intercept\_scaling=1.0, loss='epsilon\_insensitive', max\_iter=50,
+random\_state=None, tol=0.1, verbose=0) Exection time: 0.056519 MSE:
+2260896.5186994984 RMSE: 1503.6277859561849 R2: 0.8592619592348267 MAE:
+793.174067062444
+
+MLPRegressor(activation='relu', alpha=0.1, batch\_size='auto',
+beta\_1=0.9, beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+hidden\_layer\_sizes=(100,), learning\_rate='constant',
+learning\_rate\_init=0.001, max\_iter=50, momentum=0.9,
+nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+shuffle=True, solver='adam', tol=0.1, validation\_fraction=0.1,
+verbose=False, warm\_start=False) Exection time: 9.84004 MSE:
+719826.6352844844 RMSE: 848.4259751354176 R2: 0.9551916730807306 MAE:
+524.105397047731
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\neural\_network\multilayer\_perceptron.py:564:
+ConvergenceWarning: Stochastic Optimizer: Maximum iterations (50)
+reached and the optimization hasn't converged yet. \% self.max\_iter,
+ConvergenceWarning)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
