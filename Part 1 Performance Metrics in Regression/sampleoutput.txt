@@ -1,0 +1,116 @@
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+Exection time:  0.05
+MSE:  1302827.0
+RMSE:  1141.41
+R2:  0.92
+MAE:  746.96
+
+
+KNeighborsRegressor(algorithm='auto', leaf_size=30, metric='minkowski',
+          metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+          weights='uniform')
+Exection time:  9.55
+MSE:  751250.25
+RMSE:  866.75
+R2:  0.95
+MAE:  399.62
+
+
+Ridge(alpha=0.9, copy_X=True, fit_intercept=True, max_iter=100,
+   normalize=False, random_state=None, solver='auto', tol=0.1)
+Exection time:  0.02
+MSE:  1302617.9
+RMSE:  1141.32
+R2:  0.92
+MAE:  747.44
+
+
+DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
+           max_leaf_nodes=None, min_impurity_decrease=0.0,
+           min_impurity_split=None, min_samples_leaf=1,
+           min_samples_split=2, min_weight_fraction_leaf=0.0,
+           presort=False, random_state=None, splitter='best')
+Exection time:  0.37
+MSE:  800.72
+RMSE:  28.3
+R2:  1.0
+MAE:  2.67
+
+
+RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+           max_features='auto', max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False)
+Exection time:  2.0
+MSE:  766.96
+RMSE:  27.69
+R2:  1.0
+MAE:  3.33
+
+
+GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+             learning_rate=0.1, loss='ls', max_depth=3, max_features=None,
+             max_leaf_nodes=None, min_impurity_decrease=0.0,
+             min_impurity_split=None, min_samples_leaf=1,
+             min_samples_split=2, min_weight_fraction_leaf=0.0,
+             n_estimators=100, presort='auto', random_state=None,
+             subsample=1.0, verbose=0, warm_start=False)
+Exection time:  3.55
+MSE:  55149.58
+RMSE:  234.84
+R2:  1.0
+MAE:  139.17
+
+
+SGDRegressor(alpha=0.9, average=False, epsilon=0.1, eta0=0.01,
+       fit_intercept=True, l1_ratio=0.15, learning_rate='invscaling',
+       loss='squared_loss', max_iter=100, n_iter=None, penalty='l2',
+       power_t=0.25, random_state=None, shuffle=True, tol=0.0001,
+       verbose=0, warm_start=False)
+Exection time:  0.07
+MSE:  3060687.87
+RMSE:  1749.48
+R2:  0.81
+MAE:  1116.39
+
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\svm\base.py:218: ConvergenceWarning: Solver terminated early (max_iter=100).  Consider pre-processing your data with StandardScaler or MinMaxScaler.
+  % self.max_iter, ConvergenceWarning)
+
+SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1, gamma='auto',
+  kernel='rbf', max_iter=100, shrinking=True, tol=0.1, verbose=False)
+Exection time:  0.68
+MSE:  45123282.17
+RMSE:  6717.39
+R2:  -1.81
+MAE:  6235.42
+
+
+LinearSVR(C=1.0, dual=True, epsilon=0.0, fit_intercept=True,
+     intercept_scaling=1.0, loss='epsilon_insensitive', max_iter=100,
+     random_state=None, tol=0.1, verbose=0)
+Exection time:  0.05
+MSE:  2260896.52
+RMSE:  1503.63
+R2:  0.86
+MAE:  793.17
+
+
+MLPRegressor(activation='relu', alpha=0.9, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100,), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=100, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.1, validation_fraction=0.1,
+       verbose=False, warm_start=False)
+Exection time:  19.61
+MSE:  532593.91
+RMSE:  729.79
+R2:  0.97
+MAE:  423.45
+
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\neural_network\multilayer_perceptron.py:564: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (100) reached and the optimization hasn't converged yet.
+  % self.max_iter, ConvergenceWarning)

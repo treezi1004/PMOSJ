@@ -1,37 +1,31 @@
 
 # coding: utf-8
 
-# In[ ]:
+# # Part 1: Performance Metrics in Regression
+# 
+# ### Chanil Park
+# 
+# ## regression methods
+# - linear regression
+# - k-neighbors regression
+# - Ridge regression
+# - decision tree regression
+# - random forest regression
+# - gradient Boosting regression
+# - SGD regression
+# - support vector regression (SVR)
+# - linear SVR
+# - multi-layer perceptron regression.
 
-
-# Part 1: Performance Metrics in Regression
-
-### Chanil Park
-
-## regression methods
-- linear regression
-- k-neighbors regression
-- Ridge regression
-- decision tree regression
-- random forest regression
-- gradient Boosting regression
-- SGD regression
-- support vector regression (SVR)
-- linear SVR
-- multi-layer perceptron regression.
-
-
-# In[178]:
+# In[261]:
 
 
 # magic commands, sets the backend of matplotlib to the 'inline' backend
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 
-# In[179]:
+# In[278]:
 
-
-# -*- coding: utf-8 -*-
 
 """
 
@@ -64,16 +58,15 @@ from sklearn.metrics import r2_score
 #from utilities.losses import compute_loss
 #from utilities.optimizers import gradient_descent, pso, mini_batch_gradient_descent
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_predict
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
-
-# rms = sqrt(mean_squared_error(y_actual, y_predicted))
 
 # General settings
 #from utilities.visualization import visualize_train, visualize_test
 
 
-# In[244]:
+# In[279]:
 
 
 # Initialize seed
@@ -90,7 +83,7 @@ tol = 0.1 #SGDRegressor, Ridge
 verbose = 0
 
 
-# In[221]:
+# In[280]:
 
 
 def load_data():
@@ -104,7 +97,7 @@ def load_data():
     return df
 
 
-# In[222]:
+# In[281]:
 
 
 def standardize(train_data, test_data):
@@ -119,12 +112,12 @@ def standardize(train_data, test_data):
     
 
 
-# In[223]:
+# In[282]:
 
 
-def preprocessing(data):
+def firstPreparation(data):
     """
-    Pre-processing the data
+    First preperation, drop the class and prepare data
     """
     data_full = data.copy()
     data = data.drop(["price"], axis = 1)
@@ -132,7 +125,7 @@ def preprocessing(data):
     return data_full, data, labels
 
 
-# In[224]:
+# In[283]:
 
 
 def data_preprocess(data):
@@ -154,8 +147,8 @@ def data_preprocess(data):
     train_data, test_data = train_test_split(data, test_size = train_test_split_test_size, random_state=seed)
 
     # Pre-process data (both train and test)
-    train_data_full, train_data, train_labels = preprocessing(train_data)
-    test_data_full, test_data, test_labels = preprocessing(test_data)
+    train_data_full, train_data, train_labels = firstPreparation(train_data)
+    test_data_full, test_data, test_labels = firstPreparation(test_data)
     
     # Handling categorized data
     train_data = pd.get_dummies(train_data, columns=['cut', 'color', 'clarity'])
@@ -174,14 +167,14 @@ def data_preprocess(data):
     return train_data, train_labels, test_data, test_labels, train_data_full, test_data_full
 
 
-# In[225]:
+# In[284]:
 
 
 def predict(x, thetas):
     return x.dot(thetas)
 
 
-# In[234]:
+# In[285]:
 
 
 def applyModelThenResult(model, train_data, train_labels, test_data_full, test_data, test_labels):
@@ -208,7 +201,7 @@ def applyModelThenResult(model, train_data, train_labels, test_data_full, test_d
     #plt.plot(test_data_full["carat"], pred_label, color='red', linewidth=2)
 
 
-# In[245]:
+# In[286]:
 
 
 if __name__ == '__main__':

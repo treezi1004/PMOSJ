@@ -1,0 +1,205 @@
+passing
+Classifier fit is done
+Prediction is done
+KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform')
+Exection time:  40.08
+Accuracy:  0.82
+Precision:  0.63
+Recall:  0.55
+F1:  0.59
+             precision    recall  f1-score   support
+
+          0       0.87      0.90      0.88     12435
+          1       0.63      0.55      0.59      3846
+
+avg / total       0.81      0.82      0.81     16281
+
+
+
+Classifier fit is done
+Prediction is done
+GaussianNB(priors=None)
+Exection time:  0.1
+Accuracy:  0.36
+Precision:  0.27
+Recall:  0.98
+F1:  0.42
+             precision    recall  f1-score   support
+
+          0       0.96      0.17      0.28     12435
+          1       0.27      0.98      0.42      3846
+
+avg / total       0.79      0.36      0.32     16281
+
+
+
+Classifier fit is done
+Prediction is done
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Exection time:  31.23
+Accuracy:  0.85
+Precision:  0.75
+Recall:  0.54
+F1:  0.63
+             precision    recall  f1-score   support
+
+          0       0.87      0.94      0.90     12435
+          1       0.75      0.54      0.63      3846
+
+avg / total       0.84      0.85      0.84     16281
+
+
+
+Classifier fit is done
+Prediction is done
+DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Exection time:  0.19
+Accuracy:  0.81
+Precision:  0.59
+Recall:  0.61
+F1:  0.6
+             precision    recall  f1-score   support
+
+          0       0.88      0.87      0.88     12435
+          1       0.59      0.61      0.60      3846
+
+avg / total       0.81      0.81      0.81     16281
+
+
+
+Classifier fit is done
+Prediction is done
+RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features='auto', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+Exection time:  0.31
+Accuracy:  0.84
+Precision:  0.7
+Recall:  0.56
+F1:  0.62
+             precision    recall  f1-score   support
+
+          0       0.87      0.93      0.90     12435
+          1       0.70      0.56      0.62      3846
+
+avg / total       0.83      0.84      0.83     16281
+
+
+
+Classifier fit is done
+Prediction is done
+AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None)
+Exection time:  1.08
+Accuracy:  0.86
+Precision:  0.77
+Recall:  0.6
+F1:  0.68
+             precision    recall  f1-score   support
+
+          0       0.88      0.94      0.91     12435
+          1       0.77      0.60      0.68      3846
+
+avg / total       0.86      0.86      0.86     16281
+
+
+
+Classifier fit is done
+Prediction is done
+GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.1, loss='deviance', max_depth=3,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_decrease=0.0, min_impurity_split=None,
+              min_samples_leaf=1, min_samples_split=2,
+              min_weight_fraction_leaf=0.0, n_estimators=100,
+              presort='auto', random_state=None, subsample=1.0, verbose=0,
+              warm_start=False)
+Exection time:  4.31
+Accuracy:  0.87
+Precision:  0.8
+Recall:  0.6
+F1:  0.69
+             precision    recall  f1-score   support
+
+          0       0.89      0.95      0.92     12435
+          1       0.80      0.60      0.69      3846
+
+avg / total       0.87      0.87      0.86     16281
+
+
+
+F:\Users\ncksd\Anaconda3\lib\site-packages\sklearn\discriminant_analysis.py:388: UserWarning: Variables are collinear.
+  warnings.warn("Variables are collinear.")
+
+Classifier fit is done
+Prediction is done
+LinearDiscriminantAnalysis(n_components=None, priors=None, shrinkage=None,
+              solver='svd', store_covariance=False, tol=0.0001)
+Exection time:  0.22
+Accuracy:  0.84
+Precision:  0.72
+Recall:  0.56
+F1:  0.63
+             precision    recall  f1-score   support
+
+          0       0.87      0.93      0.90     12435
+          1       0.72      0.56      0.63      3846
+
+avg / total       0.83      0.84      0.84     16281
+
+
+
+Classifier fit is done
+Prediction is done
+MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100,), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=200, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)
+Exection time:  20.53
+Accuracy:  0.84
+Precision:  0.68
+Recall:  0.56
+F1:  0.62
+             precision    recall  f1-score   support
+
+          0       0.87      0.92      0.90     12435
+          1       0.68      0.56      0.62      3846
+
+avg / total       0.83      0.84      0.83     16281
+
+
+
+Classifier fit is done
+Prediction is done
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+Exection time:  1.03
+Accuracy:  0.85
+Precision:  0.73
+Recall:  0.59
+F1:  0.65
+             precision    recall  f1-score   support
+
+          0       0.88      0.93      0.91     12435
+          1       0.73      0.59      0.65      3846
+
+avg / total       0.85      0.85      0.85     16281
